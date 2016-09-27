@@ -1,0 +1,86 @@
+{% set calendarParams = {
+    "events": events,
+    "month": month,
+    "year": year,
+    "locale":"en_us"
+} %}
+<div class="calendar" data-month="{{ month }}" data-year="{{ year }}">
+
+{% calendar calendarParams as days %}
+    <div class='table-box'>
+        <table>
+            <thead>
+                <tr>
+                    {% for weekDay in calendar.head %}
+                        <th>
+                            <span class="tri">{{ weekDay.abbr|t }}</span>
+                            <span class="single">{{ weekDay.narrow|t }}</span>
+                        </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+                {% set idx = 1 %}
+                {% for item in days %}
+                    {% if idx == 1 %}
+                        <tr>
+                    {% endif %}
+
+
+                    {# Determin if day is apart of this month or previous or next #}
+                    {% if item.date|date('n') == month %}
+
+                        <td class="calendar_day {% if item.today %} calendar_day-current{% endif %}">
+                            {# Day with number and title. If 1st add month name abbr #}
+                            <div>
+                                <span class="calendar_day-num">
+                                    {% if item.day == 1 %}
+                                        {{ item.date|date("M") }}
+                                    {% endif %}
+                                    {{ item.day }}
+                                </span>
+
+                                {# Event output for day #}
+                                {% if item.events|length %}
+                                    <ul>
+                                        {% for d in item.events %}
+                                            <li>
+                                                {% set color = d.event.getColor() %}
+                                                <a class="calendar_event" style="border-left: 2px solid{{ color }};" href="{{ d.event.url }}">
+                                                    <span>{{ d.event.title }}</span>
+                                                    <div class="underlay" style="background-color:{{ color }};"></div>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </td>
+
+                    {% else %}
+
+                        {# Days of previous or next month #}
+                        <td class="calendar_day calendar_day-other">
+                            <span class="calendar_day-num">
+                                {% if item.day == 1 %}
+                                    {{ item.date|date("M") }}
+                                {% endif %}
+                                {{ item.day }}
+                            </span>
+                        </td>
+
+                    {% endif %}
+
+                    {# Increments the day of the week #}
+                    {% set idx = idx + 1 %}
+                    {# If last day in week close element & reset day to 1 #}
+                    {% if idx > 7 %}
+                        </tr>
+                        {% set idx = 1 %}
+                    {% endif %}
+                 {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

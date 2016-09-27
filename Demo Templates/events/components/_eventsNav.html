@@ -1,0 +1,15 @@
+<div class="eventsNav">
+        {%- set prev -%}
+            #cal/{{ prev|date('Y') }}/{{ prev|date('n') }}/{{ ids|length ? ids|join(','): "*" }}
+        {%- endset -%}
+
+        {%- set next -%}
+            #cal/{{ next|date('Y') }}/{{ next|date('n') }}/{{ ids|length ? ids|join(','): "*" }}
+        {%- endset -%}
+        {# Previous month arrow button #}
+        <a href="{{ prev }}" class="arrow prev" title="Previous Month"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M2.8 11.9l10.5 8.2c.3.3.8.2 1.1-.1.3-.3.1-.8-.2-1l-8.6-7h15.2c.5 0 .8-.3.8-.8s-.3-.8-.8-.8H5.6l8.9-6.9c.3-.3.4-.8.2-1-.3-.2-.5-.3-.8-.3-.1 0-.3 0-.4.2L2.8 10.6c-.1.1-.1.3-.1.6s0 .5.1.7z"/></svg></a>
+        {# Output the current selected Month & Year title #}
+        <h2>{{ current|date('M Y') }}</h2>
+        {# Next month arrow button #}
+        <a href="{{ next }}" class="arrow next" title="Next Month"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" enable-background="new 0 0 24 24"><path d="M21.2 10.6L10.7 2.4c-.4-.3-.9-.1-1.1.2-.3.3-.3.8 0 1l8.9 6.9H3.3c-.3 0-.6.3-.6.8s.3.7.6.7h15.2l-8.9 6.9c-.3.3-.5.8-.1 1 .3.1.4.3.8.3.1 0 .3 0 .4-.2l10.5-8.2c.1-.1.3-.3.3-.6s-.2-.4-.3-.6z"/></svg></a>
+</div>

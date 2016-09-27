@@ -1,0 +1,7 @@
+/**
+ * Color
+ */
+
+@each $color, $hex in $colors {
+  .color-#{$color} { color: $hex !important; }
+}

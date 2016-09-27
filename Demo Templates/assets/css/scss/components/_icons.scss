@@ -1,0 +1,15 @@
+@mixin icons() {
+  $sizes: 16, 24, 48, 72;
+
+  @each $size in $sizes {
+    .icon-#{$size} { width: #{$size}px; height: #{$size}px; }
+  }
+}
+
+.icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+
+@include icons();

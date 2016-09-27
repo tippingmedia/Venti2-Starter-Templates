@@ -1,0 +1,49 @@
+{% extends '_layout' %}
+
+{% block content %}
+<div class="push-y-3">
+    {% include 'events/components/_filter' %}
+</div>
+
+<div class="tabs tabs-events">
+    <div class="tabs-wrap">
+        <div class="tabs_tabs">
+            <a href="#events-calendar" class="tabs_tab is-active">Month</a>
+            <a href="#events-list" class="tabs_tab">List</a>
+        </div>
+    </div>
+
+    <div class="container">
+
+        {# Get the url params for month & year #}
+        {% set currentMonth = "now"|date('n') %}
+        {% set currentYear = "now"|date('Y') %}
+
+        {# Set the current Year - Month #}
+        {% set current = currentYear  ~ "-" ~ currentMonth ~ "-1" %}
+
+        {# Set previous and next months #}
+        {% set prevMonth = current|date_modify("last day of last month")|date('c') %}
+        {% set nextMonth = current|date_modify("first day of next month")|date('c') %}
+
+        {#  Get Events for month between prevMonth & nextMonth #}
+        {% set events = craft.venti.events().between(prevMonth,nextMonth|date_modify('last day of last month')|date('c')) %}
+
+        <div id="events-calendar" class="tabs_content" style="display:block;" >
+            {% include 'events/components/_eventsNav' with { prev:prevMonth, next:nextMonth, current:current, ids:[] } only %}
+            {% include 'events/components/_calendar' with { events:events, month:currentMonth, year:currentYear } only %}
+        </div>
+
+        <div id="events-list" class="tabs_content" >
+            {% include 'events/components/_eventsNav' with { prev:prevMonth, next:nextMonth, current:current, ids:[] } only %}
+
+            <div class="container container-10 pad-x-0">
+                {% include 'events/components/_timeline' with { events:events, month:currentMonth, year:currentYear } only %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include 'events/components/_modal-calendar-groups' %}
+{% endblock %}

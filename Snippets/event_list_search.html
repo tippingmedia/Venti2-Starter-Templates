@@ -1,0 +1,41 @@
+{% set query = craft.request.getParam('query') %}
+{% set total = craft.venti.events().search(query).total() %}
+{% set events = craft.venti.events().search(query) %}
+
+<h2>
+    <strong>{{ total }}</strong> events found for <span>{{ query }}</span>
+</h2>
+
+{% paginate craft.venti.events().limit(12) as events %}
+    <ul>
+        {% for event in events %}
+            {# Event #}
+            <li>
+                <a href="{{ event.url }}">
+                    <h2>{{ event.title }}</h2>
+                    {% if event.allDay %}
+                        <p>All Day</p>
+                    {% else %}
+                        <p>
+                            {{ event.startDate|date("g:i a") }} - {{ event.endDate|date("g:i a") }}
+                        </p>
+                    {% endif %}
+                    {% if event.repeat %}
+                        <p>
+                            {{ event.summary }}
+                        </p>
+                    {% endif %}
+                    {% if event.location|length %}
+                        <p>
+                            <a href="{{ event.location[0].getMapUrl() }}">
+                                {{ event.location[0].title }}
+                            </a>
+                            ({{ event.specificLocation|default('') }})
+                        </p>
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    {% include '_pagination' %}

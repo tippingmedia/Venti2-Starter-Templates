@@ -1,0 +1,120 @@
+/**
+ * Tabs
+ */
+
+.tabs_tabs {
+  background: white;
+  box-shadow: 0 .5rem 1.2rem rgba(black, .08);
+  font-size: 0;
+  line-height: 1.6rem;
+  user-select: none;
+}
+
+.tabs-wrap {
+    width: 100%;
+    display: inline-block;
+    text-align: center;
+    margin-bottom: 77px;
+}
+
+.tabs_tab {
+    display: block;
+    position: relative;
+    padding: 1rem;
+    border-bottom: solid 1px co(darkGray);
+    background: white;
+    font-size: 1rem;
+    line-height: .8;
+    font-family: $font;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    text-decoration: none;
+    text-align: center;
+    color: co(darkGray);
+
+  &:not(.is-active) {
+    &:before {
+      opacity: 0;
+      transform: translateY(-1rem);
+    }
+
+    &:hover {
+      background: co(gray);
+      color: white;
+    }
+  }
+
+  &.is-active {
+    background: co(yellow);
+    color: white;
+  }
+}
+
+.tabs_content:not(.is-active) {
+  display: none;
+}
+
+.tabs_content-boxed {
+  padding: 3rem .8rem;
+  background: white;
+  text-align: left;
+  border-bottom: solid 2px co(gray);
+}
+
+@media (max-width: 767px) {
+  .tabs-events .tabs_tab[href='#events-calendar'] {
+    display: none;
+  }
+}
+
+@media (mq(sm-min)) {
+  .tabs_tabs {
+    display: inline-block;
+  }
+
+  .tabs_tab {
+    display: inline-block;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    min-width: 6rem;
+    border-bottom: none;
+
+    &:hover:before {
+      border-top-color: co(gray);
+    }
+
+    &:before {
+      content: '';
+      position: absolute;
+      bottom: -1.5rem;
+      left: 50%;
+      margin-left: -1rem;
+      border: solid 1rem;
+      border-width: .8rem 1rem;
+      border-color: white transparent transparent;
+      transition: tr(short);
+    }
+
+    &:not(:first-child) {
+      border-left: dotted 1px co(darkGray);
+    }
+
+    &.is-active {
+      border-left: solid 1px co(yellow);
+
+      &:before {
+        border-top-color: co(yellow);
+      }
+
+      + .tabs_tab {
+        border-left: solid 1px co(yellow);
+      }
+    }
+  }
+
+  .tabs_content-boxed {
+    margin-top: -1.6rem;
+    padding-top: 10rem;
+    padding-bottom: 10rem;
+  }
+}

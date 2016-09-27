@@ -1,0 +1,30 @@
+/**
+ * Search
+ */
+
+.search {
+  display: flex;
+  align-items: center;
+
+  // .input:not(:valid) + .btn {
+  //   cursor: default;
+  //   pointer-events: none;
+  //
+  //   span,
+  //   .icon {
+  //     color: rgba(co(darkGray), .25);
+  //   }
+  // }
+
+  .btn {
+    flex-shrink: 0;
+    margin-left: -1px;
+  }
+}
+
+@media (mq(xs-max)) {
+  .search .btn {
+    padding-right: 1.9rem;
+    padding-left: 1.9rem;
+  }
+}

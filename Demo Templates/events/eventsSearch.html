@@ -1,0 +1,68 @@
+{% extends '_layout' %}
+
+{% block content %}
+<div class="push-y-3">
+    <div class="push-b-lg">
+        <div class="row center-lg">
+            <div class="col col-12 col-sm-4 col-md-3 col-lg-3">
+              <a class="btn" href="/events"><span>{{ 'Back to events'|t }}</span></a>
+            </div>
+
+            <div class="access_search col col-12 col-md-4 col-lg-4">
+                <form class="search iconInput" action="/search/events">
+                    <input type="search" class="input" name="query" placeholder="Search &hellip;" required>
+                    <button type="submit" class="btn"><span class="display-sm-block">Search</span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="tabs tabs-events">
+    {% set query = craft.request.getParam('query') %}
+    {% set total = craft.venti.events().search(query).total() %}
+    {% set events = craft.venti.events().search(query) %}
+
+    <div class="container">
+
+        <div id="events-list">
+            <div class="container container-10 pad-x-0">
+                <h2 class='search-title text--center'><strong>{{ total }}</strong> events found for <span>{{ query }}</span></h2>
+                <ol class="timeline">
+                    {# Group events by day of the month using the event's startDate as a guide #}
+                    {% for day, dayEvents in events|group('startDate|date("M d Y")')  %}
+
+                        <li class="timeline_stop">
+                            <span class="label label-big">{{ day|date('M') }} {{ day|date('d') }}</span>
+
+                            <div class="timeline_items">
+                                {% for event in dayEvents %}
+
+                                    <a href="{{ event.url }}" class="timeline_item" style="color:{{ event.getColor() }}">
+                                        {# {% if event.eventImage is defined and event.eventImage|length %}
+                                            <div class="timeline_banner" style="background-image: url({{ event.eventImage.getUrl() }});"></div>
+                                        {% endif %} #}
+
+                                    <div class="timeline_content">
+                                        <h2>{{ event.title }}</h2>
+                                        {% if event.allDay %}
+                                            All Day
+                                        {% else %}
+                                            <p>{{ event.startDate|date("g:i a") }} - {{ event.endDate|date("g:i a") }}</p>
+                                        {% endif %}
+                                    </div>
+                                  </a>
+
+                              {% endfor %}
+                            </div>
+                        </li>
+
+                    {% endfor %}
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

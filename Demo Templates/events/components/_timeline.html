@@ -1,0 +1,31 @@
+<ol class="timeline" data-month="{{ month }}" data-year="{{ year }}">
+    {# Group events by day of the month using the event's startDate as a guide #}
+    {% for day, dayEvents in events|group('startDate|date("M d Y")')  %}
+
+        <li class="timeline_stop">
+            <span class="label label-big">{{ day|date('M') }} {{ day|date('d') }}</span>
+
+            <div class="timeline_items">
+                {% for event in dayEvents %}
+
+                    <a href="{{ event.url }}" class="timeline_item" style="color:{{ event.getColor() }}">
+                        {# {% if event.eventImage is defined and event.eventImage|length %}
+                            <div class="timeline_banner" style="background-image: url({{ event.eventImage.getUrl() }});"></div>
+                        {% endif %} #}
+
+                    <div class="timeline_content">
+                        <h2>{{ event.title }}</h2>
+                        {% if event.allDay %}
+                            All Day
+                        {% else %}
+                            <p>{{ event.startDate|date("g:i a") }} - {{ event.endDate|date("g:i a") }}</p>
+                        {% endif %}
+                    </div>
+                  </a>
+
+              {% endfor %}
+            </div>
+        </li>
+
+    {% endfor %}
+</ol>

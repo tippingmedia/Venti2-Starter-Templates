@@ -1,0 +1,43 @@
+{# In the group settings if you set the template you can use event as the main variable. #}
+<h2>{{ event.title }}</h2>
+{% set group = event.getGroup() %}
+<h4>{{ group.name }}</h4>
+
+<div>
+    <h5>When:</h5>
+    {% if event.repeat %}
+        {% if event.allDay %}
+            {{ event.summary }} beginning, {{ event.startDate|date('M d Y') }} - {{ event.endDate|date('M d Y') }}
+        {% else %}
+            {{ event.summary }} beginning, {{ event.startDate|date('M d Y g:i a') }} - {{ event.endDate|date('M d Y g:i a') }}
+        {% endif %}
+
+    {% else %}
+        {% if event.allDay %}
+            {{ event.startDate|date('M d Y') }} - {{ event.endDate|date('M d Y') }}
+        {% else %}
+            {{ event.startDate|date('M d Y g:i a') }} - {{ event.endDate|date('M d Y g:i a') }}
+        {% endif %}
+    {% endif %}
+</div>
+
+{% if event.location|length %}
+    <div>
+        <h5>Location:</h5>
+        <a href="{{ event.location[0].getMapUrl() }}">
+            {{ event.location[0].title }}
+        </a>
+        ({{ event.specificLocation|default('') }})
+    </div>
+{% endif %}
+
+{% if event.registration|length %}
+    <div>
+        <h5>Registration:</h5>
+        {% if event.registration.type == "embed" %}
+            <div>{{ event.registration.embed|raw }}</div>
+        {% else %}
+            <a href="{{ event.registration.url }}">Click to Register</a>
+        {% endif %}
+    </div>
+{% endif %}

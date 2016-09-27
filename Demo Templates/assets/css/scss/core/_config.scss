@@ -1,0 +1,65 @@
+body {
+    background-color: #F9F9FB;
+    font-size: 1rem;
+    line-height: 1.5;
+    padding-bottom: 10rem;
+    padding-top: 10rem;
+}
+
+$font: 'Open Sans', sans-serif;
+
+$colors: (
+  black: #000,
+  cream: #fcf7eb,
+  darkerGray: #232426,
+  darkestGray: #101e20,
+  darkGray: #322f31,
+  fog: #f3f3f3,
+  fuchsia: #c5258f,
+  gray: #989798,
+  green: #d3b767,
+  orange: #f38469,
+  red: #eb3e35,
+  teal: #9dd3d5,
+  white: #fff,
+  yellow: #ffc848,
+);
+
+$breakpoints: (
+  lg: 1200px,
+  md: 920px,
+  sm: 640px,
+);
+
+$queries: (
+  lg-min: 'min-width: #{bp(lg)}',
+  md-max: 'max-width: (#{bp(lg)} - 1)',
+  md-min: 'min-width: #{bp(md)}',
+  sm-max: 'max-width: (#{bp(md)} - 1)',
+  sm-min: 'min-width: #{bp(sm)}',
+  xs-max: 'max-width: (#{bp(sm)} - 1)',
+);
+
+$align: (
+    c: 'text-align:center',
+    l: 'text-align:left',
+    r: 'text-align:right',
+);
+
+$transitions: (
+  short: .25s,
+  medium: .5s,
+  long: .75s,
+);
+
+img,
+svg,
+audio,
+video {
+  max-width: 100%;
+  vertical-align: top;
+}
+
+svg {
+  fill: currentColor;
+}

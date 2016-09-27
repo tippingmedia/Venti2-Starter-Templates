@@ -1,0 +1,40 @@
+/**
+ * Overlay
+ */
+
+.overlay {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  text-align: center;
+
+  .container {
+    max-width: none;
+    padding-right: 2rem;
+    padding-left: 2rem;
+  }
+
+  .row {
+    margin: 0;
+  }
+
+  .col {
+    padding: 0;
+  }
+}
+
+.overlay_content {
+  padding: 6rem 4rem;
+  background: white;
+}
+
+@include breakpoint(phablet) {
+  .overlay {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+
+    .container {
+      padding-right: 4rem;
+      padding-left: 4rem;
+    }
+  }
+}

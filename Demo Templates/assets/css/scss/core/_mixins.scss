@@ -1,0 +1,61 @@
+@mixin underline($color: co(yellow), $link: true) {
+  background-image: linear-gradient($color, $color);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: 100% .2em;
+
+  @if $link == true {
+    transition: tr(short);
+
+    &:hover {
+      background-position: center;
+      background-size: 100% 80%;
+    }
+  }
+}
+
+@mixin slideline($color: co(yellow), $link: true) {
+  background-image: linear-gradient($color, $color);
+  background-repeat: no-repeat;
+  background-position: left bottom;
+  background-size: 0 .2em;
+
+  @if $link == true {
+    transition: tr(short);
+
+    &:hover {
+      background-size: 100% .2em;
+    }
+  }
+}
+
+@mixin font-size($font-size, $line-height: auto, $important: false) {
+
+  @if ($important == true) {
+    $important: !important;
+  } @elseif ($important == false) {
+    $important: null;
+  } @else {
+    @error "`#{$important}` needs to be `true` or `false`."
+  }
+
+
+  font-size: ($font-size / 16px) * 1rem $important;
+
+  @if ($line-height == 'auto') {
+    line-height: ceil($font-size / 1.6) * (1.6 / $font-size) $important;
+  }
+
+  @else {
+
+    @if (type-of($line-height) == number or $line-height == 'inherit' or $line-height == 'normal') {
+      line-height: $line-height $important;
+    }
+
+    @elseif ($line-height != 'none' and $line-height != false) {
+      @error "D’oh! `#{$line-height}` is not a valid value for `$line-height`."
+    }
+
+  }
+
+}

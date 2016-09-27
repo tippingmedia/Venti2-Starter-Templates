@@ -1,0 +1,92 @@
+/**
+ * Events Nav
+ */
+
+ .eventsNav .arrow svg{
+   display: block;
+   width: 16px;
+   height: 16px;
+   margin: 6px;
+   fill: currentcolor;
+ }
+
+ .eventsNav .arrow {
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+   font-family: $font;
+   display: inline-block !important;
+   vertical-align: top;
+   text-align: center;
+   cursor: pointer;
+   border: none;
+   background: 0 0;
+   transition: .25s;
+ }
+
+ .eventsNav {
+   margin-bottom: 25px;
+   text-align: center;
+   position: relative;
+   text-transform: uppercase;
+   font: 24px/1 $font;
+   color: #323232;
+   letter-spacing: 4px;
+   -webkit-user-select: none;
+   -moz-user-select: none;
+   -ms-user-select: none;
+   user-select: none;
+ }
+
+ .eventsNav:before {
+   content: '';
+   position: absolute;
+   top: 13px;
+   right: 0;
+   left: 0;
+   height: 2px;
+   background: #e6e6e7;
+ }
+
+ .eventsNav h2 {
+    display: inline-block;
+   padding: 0 20px 0 24px;
+   background: #F9F9FB;
+   position: relative;
+   line-height: 28px;
+   font-family: $font;
+   font-weight: 400;
+ }
+
+ .eventsNav .arrow {
+   position: relative;
+   display: inline-block !important;
+   width: 28px;
+   height: 28px;
+   text-indent: -999em;
+   border-radius: 50%;
+   background: #fff;
+   background: linear-gradient(#fff,#fafafa);
+   box-shadow: inset 0 0 0 1px #e6e6e7,0 0 0 12px #f9f9fb;
+   color: #7c8187;
+   transition: background .25s;
+ }
+
+
+ .eventsNav .arrow.disabled {
+   background: #e6e6e7;
+   color: #fff;
+   transition: none;
+   cursor: default;
+   pointer-events: none;
+ }
+
+ .eventsNav .arrow:hover {
+   background: #7c8187;
+   color: #fff;
+   box-shadow: 0 0 0 12px #f9f9fb;
+ }

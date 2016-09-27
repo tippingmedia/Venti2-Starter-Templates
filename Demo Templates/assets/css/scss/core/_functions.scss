@@ -1,0 +1,13 @@
+/**
+ * Functions
+ */
+
+@function bp($key) { @return map-get($breakpoints, $key); }
+@function co($key) { @return map-get($colors, $key); }
+@function mq($key) { @return map-get($queries, $key); }
+@function tr($key) { @return map-get($transitions, $key); }
+
+
+.text--center {
+    text-align:center;
+}

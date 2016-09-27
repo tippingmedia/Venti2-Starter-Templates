@@ -1,0 +1,136 @@
+/**
+ * Timeline
+ */
+
+.timeline {
+  .label {
+    display: block;
+    width: 4rem;
+  }
+}
+
+.timeline_stop {
+  position: relative;
+
+  &:not(:first-child) {
+    margin-top: 3rem;
+  }
+}
+
+.timeline_item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: currentColor;
+  text-decoration:none;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: .5rem;
+    background: white;
+    transition: inherit;
+  }
+
+  &:hover {
+    padding-left: 1rem;
+
+
+    &:before {
+      left: 1rem;
+      opacity: .75;
+      -webkit-transition: 0.25s;
+      transition: 0.25s;
+    }
+
+    p {
+        color: co(darkGray);
+        font-style: italic;
+        -webkit-transition: 0.25s;
+        transition: 0.25s;
+    }
+  }
+
+  &:not(:first-child) {
+    margin-top: 3rem;
+  }
+
+  h2 {
+    color: co(darkGray);
+    font-size: 2rem;
+    line-height: 1.25;
+    font-weight: 500;
+    font-family: $font;
+  }
+
+  p {
+    font-style: italic;
+    color: co(gray);
+    font-family: $font;
+  }
+}
+
+.timeline_content {
+  flex-grow: 1;
+  position: relative;
+  padding: 1.2rem 2rem 1.3rem 2.2rem;
+}
+
+.timeline_banner {
+  position: relative;
+  flex-shrink: 0;
+  width: 16.5rem;
+  height: 9.5rem;
+}
+
+@media (max-width: 919px) {
+  .timeline .label {
+    margin-bottom: 2.4rem;
+  }
+
+  .timeline_stop:not(:first-child) {
+    padding-top: 2.4rem;
+    border-top: dotted 1px;
+  }
+
+  .timeline_banner {
+    display: none;
+  }
+}
+
+@media (min-width: 920px) {
+  .timeline .label {
+    float: left;
+    margin-left: -13rem;
+  }
+
+  .timeline_stop {
+    padding-left: 16rem;
+
+    &:not(:last-child):before {
+      content: '';
+      position: absolute;
+      top: 2.5rem;
+      bottom: -3.5rem;
+      left: 6rem;
+      border-right: dotted 1px;
+    }
+  }
+
+  .timeline_item {
+    flex-direction: row-reverse;
+
+    h2 {
+      line-height: 3rem;
+    }
+
+    p {
+      line-height: 2.2rem;
+    }
+  }
+}

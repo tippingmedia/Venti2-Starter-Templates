@@ -1,0 +1,34 @@
+{% macro icon(icon, size = 24, baseline = 24, classes = '') %}
+    <svg class='icon icon-{{ size }} {{ classes }}'><use xlink:href='#icon-{{ baseline }}-{{ icon }}'></use></svg>
+{% endmacro %}
+
+<div class="modal remodal" data-remodal-id="modal-calendars">
+    <form class="calendar-groups">
+        <div class="modal_close" data-remodal-action="close">
+            {{ icon('close') }}
+        </div>
+
+        <div class="modal_header">
+            <div class="modal_container">
+                {{ icon('settings', 48, 24, 'co-yellow') }}
+                <h2>{{ 'Choose Calendars'|t }}</h2>
+                <p>{{ 'Turn on calendars you’re interested in. We’ll remember your preferences and only show events you care about!'|t }}</p>
+            </div>
+        </div>
+
+        <div class="modal_content fill-weave-fog">
+            <ul class="switches">
+                {% for group in craft.venti.groups() %}
+                    <li style="color:{{ group.color }}">
+                        <input type="checkbox" id="cal-{{ group.id }}" name="cal[]" value="{{ group.id }}">
+                        <label for="cal-{{ group.id }}"><span>{{ group.name}}</span></label>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="modal_content text--center">
+            <button class="btn calendar-groups-done" data-remodal-action="close"><span>{{ 'Done'|t }}</span></button>
+        </div>
+    </form>
+</div>

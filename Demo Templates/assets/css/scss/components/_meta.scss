@@ -1,0 +1,66 @@
+/**
+ * Meta
+ */
+
+.meta {
+    background: linear-gradient(to bottom right, co(red), co(fuchsia));
+    background: -webkit-linear-gradient(top left, #eb3e35, #c5258f);
+    font-size: 2.6rem;
+    line-height: 1.25;
+    font-weight: 300;
+    font-family: $font;
+    color: white;
+
+
+  .block_layer-over {
+    background: linear-gradient(to bottom right, rgba(co(darkerGray), .6), rgba(co(darkerGray), .3));
+  }
+
+  strong {
+    margin-right: .5em;
+    margin-right: .5em;
+    font-size: 1rem;
+    line-height: 1.25;
+    font-family: $font;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    line-height: inherit;
+    letter-spacing: 0;
+    font-weight:900;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+    background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+    background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5));
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: 100% .2em;
+    -webkit-transition: 0.25s;
+    transition: 0.25s;
+    font-style: italic;
+    font-weight:1;
+    cursor:pointer;
+    &:hover{
+        background-position: center;
+        background-size: 100% 80%;
+    }
+  }
+
+  li + li {
+    margin-top: .5em;
+  }
+}
+
+@media (mq(xs-max)) {
+  .meta strong {
+    display: block;
+  }
+}
+
+@media (mq(md-min)) {
+  .meta strong {
+    font-size: 3.2rem;
+  }
+}

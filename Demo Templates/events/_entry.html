@@ -1,0 +1,31 @@
+{% extends '_layout' %}
+
+{% block content %}
+    <div class="section block align-center">
+        <div class="container container-8">
+            <div class="section_header push-b-0">
+                <h1 class="color-yellow"><span class="color-gray">{{ event.title }}</span></h1>
+                {% set group = event.getGroup() %}
+                <h2>{{ group.description|default('') }}</h2>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="meta section section-boxed block">
+        <div class="container container-8">
+            <ul>
+                <li><strong>When</strong>
+                    {{ event.startDate|date('D, M d, Y') }}
+                    {% if event.allDay != 1 %} @ {{ event.startDate|date('g:i A') }} {% endif %}
+                </li>
+                {% if event.location|length %}
+                    <li><strong>Where</strong> <a href="{{ event.location[0].getMapUrl() }}">{{ event.location[0].title }}</a> ({{ event.specificLocation|default('') }})</li>
+                {% endif %}
+                {% if event.repeat %}
+                    <li><strong>Repeats</strong> {{ event.summary|default('') }}</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
