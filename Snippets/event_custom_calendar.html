@@ -1,0 +1,101 @@
+{# Get the url params for month & year #}
+{% set currentMonth = "now"|date('n') %}
+{% set currentYear = "now"|date('Y') %}
+
+{# Set the current Year - Month #}
+{% set current = currentYear  ~ "-" ~ currentMonth ~ "-1" %}
+
+{# Set previous and next months #}
+{% set prevMonth = current|date_modify("last day of last month")|date('c') %}
+{% set nextMonth = current|date_modify("first day of next month")|date('c') %}
+
+{#  Get Events for month between prevMonth & nextMonth #}
+{% set events = craft.venti.events().between(prevMonth,nextMonth|date_modify('last day of last month')|date('c')) %}
+
+
+{% set calendarParams = {
+    "events": events,
+    "month": month,
+    "year": year,
+    'startDOW': 0,
+    "locale":"en_us"
+} %}
+<div>
+
+{% calendar calendarParams as days %}
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    {% for weekDay in calendar.head %}
+                        <th>
+                            <span>{{ weekDay.narrow|t }}</span>
+                        </th>
+                    {% endfor %}
+                </tr>
+            </thead>
+
+            <tbody>
+                {% set idx = 1 %}
+                {% for item in days %}
+                    {% if idx == 1 %}
+                        <tr>
+                    {% endif %}
+
+
+                    {# Determin if day is apart of this month or previous or next #}
+                    {% if item.date|date('n') == month %}
+
+                        <td class="{% if item.today %}current{% endif %}">
+                            {# Day with number and title. If 1st add month name abbr #}
+                            <div>
+                                <span>
+                                    {% if item.day == 1 %}
+                                        {{ item.date|date("M") }}
+                                    {% endif %}
+                                    {{ item.day }}
+                                </span>
+
+                                {# Event output for day #}
+                                {% if item.events|length %}
+                                    <ul>
+                                        {% for d in item.events %}
+                                            <li>
+                                                {% set color = d.event.getColor() %}
+                                                <a href="{{ d.event.url }}">
+                                                    <span>{{ d.event.title }}</span>
+                                                    <div style="background-color:{{ color }};"></div>
+                                                </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </div>
+                        </td>
+
+                    {% else %}
+
+                        {# Days of previous or next month #}
+                        <td>
+                            <span>
+                                {% if item.day == 1 %}
+                                    {{ item.date|date("M") }}
+                                {% endif %}
+                                {{ item.day }}
+                            </span>
+                        </td>
+
+                    {% endif %}
+
+                    {# Increments the day of the week #}
+                    {% set idx = idx + 1 %}
+                    {# If last day in week close element & reset day to 1 #}
+                    {% if idx > 7 %}
+                        </tr>
+                        {% set idx = 1 %}
+                    {% endif %}
+                 {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
