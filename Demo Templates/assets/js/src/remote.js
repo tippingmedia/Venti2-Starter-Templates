@@ -3,24 +3,35 @@
  * @return JSON/HTML
  * Module for fetching remote content through ajax.
  */
+ 
 export default function remote (url, params = {}, dataType = 'html') {
 
-    const headers = new Headers();
-    headers.append('Content-Type', 'text/plain');
+    return new Promise(function (resolve) {
 
-    if (dataType === 'json') {
-        headers.set('Content-Type', 'application/json');
-    }
+        const headers = new Headers();
+        headers.append('Content-Type', 'text/plain');
 
-    const request = new Request(url, {
-        method: 'GET',
-        //body: JSON.stringify(params),
-        redirect: 'follow',
-        headers: headers
+         if (dataType === 'json') {
+             headers.set('Content-Type', 'application/json');
+         }
+
+         const request = new Request(url, {
+             method: 'POST',
+             body: serialize(params),
+             redirect: 'follow',
+             headers: headers
+         });
+
+         return fetch(request)
+             .then(response => {
+                 resolve(dataType === 'json' ? response.json() : response.text());
+             });
+
+         function serialize (data) {
+             return Object.keys(data).map(function (keyName) {
+                 return encodeURIComponent(keyName) + '=' + encodeURIComponent(data[keyName])
+             }).join('&');
+         }
+
     });
-
-    return fetch(request)
-        .then(response => {
-            return dataType === 'json' ? response.json() : response.text();
-        });
 }

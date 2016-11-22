@@ -18,7 +18,7 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
           presets: ['es2015']
         }
@@ -30,7 +30,7 @@ module.exports = {
     new webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false },
       output: { comments: false },
-      sourceMap: true
+      sourceMap: false
     }),
     // env plugin
     new webpack.DefinePlugin({
