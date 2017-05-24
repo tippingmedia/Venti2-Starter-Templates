@@ -23,8 +23,8 @@
         {% set current = currentYear  ~ "-" ~ currentMonth ~ "-1" %}
 
         {# Set previous and next months #}
-        {% set prevMonth = current|date_modify("last day of last month")|date('c') %}
-        {% set nextMonth = current|date_modify("first day of next month")|date('c') %}
+        {% set prevMonth = current|date_modify("last day of last month 23:59:00")|date('c') %}
+        {% set nextMonth = current|date_modify("first day of next month 00:00:00")|date('c') %}
 
         {#  Get Events for month between prevMonth & nextMonth #}
         {% set events = craft.venti.events().between(prevMonth,nextMonth|date_modify('last day of last month')|date('c')) %}
