@@ -7,7 +7,7 @@ class Calendar {
         //console.info("Calendar Loaded");
         const $this = this;
         this.calendars = localStorage.getObj('calendar.cal');
-        this.router = new Grapnel();
+        this.router = new Grapnel({ pushState : true });
         this.setActiveCalendars();
         this.setCalendarEvents();
 
@@ -66,6 +66,7 @@ class Calendar {
 
         form.addEventListener('click', function (evt) {
             //evt.preventDefault();
+
             if (evt.target.classList.contains('calendar-groups-done') || evt.target.parentNode.classList.contains('calendar-groups-done')) {
                 const groupInputs = form.querySelectorAll('input[type=checkbox]:checked');
                 const selectedGroupIds = Array.from(groupInputs, input => {

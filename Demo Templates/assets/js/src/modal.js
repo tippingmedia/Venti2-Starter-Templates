@@ -10,12 +10,15 @@ class Modal {
 
     modalEvents () {
         const $this = this;
-        for(const modal of this.modalButtons) {
-            modal.addEventListener('click',function (evt) {
+        for (var i = 0; i < this.modalButtons.length; i++) {
+            this.modalButtons[i].addEventListener('click',function (evt) {
                 evt.preventDefault();
                 $this.openModal(this);
             });
         }
+        // for(const modal of this.modalButtons) {
+        //     modal
+        // }
     }
 
     openModal (elm) {
