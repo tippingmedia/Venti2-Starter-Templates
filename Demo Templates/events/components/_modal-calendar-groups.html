@@ -2,15 +2,17 @@
     <svg class='icon icon-{{ size }} {{ classes }}'><use xlink:href='#icon-{{ baseline }}-{{ icon }}'></use></svg>
 {% endmacro %}
 
+{% import _self as icons %}
+
 <div class="modal remodal" data-remodal-id="modal-calendars">
     <form class="calendar-groups">
         <div class="modal_close" data-remodal-action="close">
-            {{ icon('close') }}
+            {{ icons.icon('close') }}
         </div>
 
         <div class="modal_header">
             <div class="modal_container">
-                {{ icon('settings', 48, 24, 'co-yellow') }}
+                {{ icons.icon('settings', 48, 24, 'co-yellow') }}
                 <h2>{{ 'Choose Calendars'|t }}</h2>
                 <p>{{ 'Turn on calendars you’re interested in. We’ll remember your preferences and only show events you care about!'|t }}</p>
             </div>
