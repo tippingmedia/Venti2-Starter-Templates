@@ -18,8 +18,8 @@
     {% include 'partials/_icons' %}
 
     <script type="text/javascript">
-        window.csrfTokenName = "{{ craft.config.get('csrfTokenName') }}";
-        window.csrfTokenValue = "{{ craft.request.getCsrfToken }}";
+        window.csrfTokenName = "{{ craft.config.csrfTokenName|e('js') }}";
+        window.csrfTokenValue = "{{ craft.request.csrfToken|e('js') }}";
     </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=default,es6,fetch&flags=gated"></script>

@@ -28,7 +28,7 @@ class Filler {
     fetchContent() {
         const $this = this;
         let data = this._params;
-        data[window.csrfTokenName] = window.csrfTokenValue;
+        data[csrfTokenName] = window.csrfTokenValue;
 
         axios.get(this._eurl, {
                 params: data
